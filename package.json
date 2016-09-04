@@ -1,0 +1,34 @@
+{
+  "name": "passwordless-authjetstore",
+  "version": "1.0.0",
+  "description": "Free cloud-hosted TokenStore for passwordless",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "babel --presets es2015 -d lib/ src/",
+    "prepublish": "npm run compile"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AuthJet/passwordless-authjet-tokenstore.git"
+  },
+  "keywords": [
+    "passwordless",
+    "tokenstore",
+    "hosted",
+    "authjet"
+  ],
+  "author": "Eric Wyne <ecwyne@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AuthJet/passwordless-authjet-tokenstore/issues"
+  },
+  "homepage": "https://github.com/AuthJet/passwordless-authjet-tokenstore#readme",
+  "dependencies": {
+    "bluebird": "^3.4.3"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.14.0",
+    "babel-preset-es2015": "^6.14.0"
+  }
+}
