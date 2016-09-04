@@ -1,6 +1,6 @@
 {
   "name": "passwordless-authjetstore",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Free cloud-hosted TokenStore for passwordless",
   "main": "lib/index.js",
   "scripts": {

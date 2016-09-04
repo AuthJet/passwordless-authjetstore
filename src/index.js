@@ -19,6 +19,9 @@ function AuthJetTokenStore(username, password, appId){
 						if (status != 'OK'){
 							console.log(`No AuthJet app found with appId "${appId}"\nPlease check appId or create a new app at https://authjet.com/account/apps`);
 						}
+					})
+					.catch(() => {
+						console.log(`No AuthJet app found with appId "${appId}"\nPlease check appId or create a new app at https://authjet.com/account/apps`);
 					});
 			} else {
 				console.log(`${username} is NOT properly authenticated to AuthJet\nPlease check your username and password.`);
@@ -29,14 +32,24 @@ function AuthJetTokenStore(username, password, appId){
 
 const request = (href, cb) => {
 	let out = '';
+	let statusCode;
 	const req = https.get(url.parse(href), res => {
+		statusCode = res.statusCode;
 		res.on('data', data => out += data);
 	});
 	req.on('close', () => {
-		try {
-			return cb(null, JSON.parse(out));
-		} catch (e){
-			return cb(null, out);
+		if (statusCode == 200){
+			try {
+				return cb(null, JSON.parse(out));
+			} catch (e){
+				return cb(null, out);
+			}
+		} else if (statusCode == 401){
+			return cb(new Error('AuthJet Not Authenticated'));
+		} else if (statusCode == 500){
+			return cb(new Error('Internal AuthJet Server Error'));
+		} else {
+			return cb(statusCode);
 		}
 	});
 	req.on('error', cb);
@@ -45,7 +58,7 @@ const request = (href, cb) => {
 
 AuthJetTokenStore.prototype.authenticate = function(token, uid, cb) {
 	const sendUrl = `${this.appUrl}/authenticate?token=${token}&uid=${uid}`;
-	return request(sendUrl, (err, {valid, referrer}) => cb(err, valid, referrer));
+	return request(sendUrl, (err, {valid, referrer} = {}) => cb(err, valid, referrer));
 };
 
 AuthJetTokenStore.prototype.storeOrUpdate = function(token, uid, msToLive, originUrl, cb) {
