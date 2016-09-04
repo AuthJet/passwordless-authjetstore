@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AuthJet/passwordless-authjet-tokenstore.git"
+    "url": "git+https://github.com/AuthJet/passwordless-authjetstore.git"
   },
   "keywords": [
     "passwordless",
@@ -21,9 +21,9 @@
   "author": "Eric Wyne <ecwyne@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/AuthJet/passwordless-authjet-tokenstore/issues"
+    "url": "https://github.com/AuthJet/passwordless-authjetstore/issues"
   },
-  "homepage": "https://github.com/AuthJet/passwordless-authjet-tokenstore#readme",
+  "homepage": "https://github.com/AuthJet/passwordless-authjetstore#readme",
   "dependencies": {
     "bluebird": "^3.4.3"
   },
